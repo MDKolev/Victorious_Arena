@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Victorious Arena </title>
+    <th:block th:replace="~{fragments/head}"></th:block>
+</head>
+<body>
+<header th:include="~{fragments/navigation}"></header>
+<main>
+    <div class="text-center mb-3">
+        <h4 class="text-white mt-2">Welcome to the arena, #{username}}</h4>
+    </div>
+    <hr class="my-3"/>
+    <div class="container">
+        <div class="row mb-4 d-flex justify-content-around">
+            <div class="col-md-3 d-flex flex-column text-center mb-3">
+                <img th:src="@{/images/warrior.jpg}" class="img-thumb" width="300" height="300"/>
+                <h5 class="text-white text-center">Warrior</h5>
+                <a class="btn btn-info mb-2">Details</a>
+                <a class="btn btn-danger">Delete</a>
+            </div>
+            <div class="col-md-3 d-flex flex-column text-center mb-3">
+                <img th:src="@{/images/archer.jpg}" class="img-thumb" width="300" height="300"/>
+                <h5 class="text-white text-center">Archer</h5>
+                <a class="btn btn-info mb-2">Details</a>
+                <a class="btn btn-danger">Delete</a>
+            </div>
+            <div class="col-md-3 d-flex flex-column text-center mb-3">
+                <img th:src="@{/images/mage.jpg}" class="img-thumb" width="300" height="300"/>
+                <h5 class="text-white text-center">Mage</h5>
+                <a class="btn btn-info mb-2">Details</a>
+                <a class="btn btn-danger">Delete</a>
+            </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer}" />
+</body>
+</html>
