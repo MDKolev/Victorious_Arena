@@ -32,7 +32,7 @@ public class UserController {
     public String registerUser(@ModelAttribute("user") @Valid UserRegistrationDTO userRegistrationDTO) {
         userService.registerUser(userRegistrationDTO);
 
-        return "details-hero";
+        return "redirect:/user/login";
     }
 
     @GetMapping("/user/login")

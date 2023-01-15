@@ -1,7 +1,10 @@
 package app.service;
 
 import app.domain.dto.HeroDTO;
+import app.domain.dto.UserRegistrationDTO;
+import app.domain.entity.ClassEnum;
 import app.domain.entity.Hero;
+import app.domain.entity.User;
 import app.domain.service.CreateHeroService;
 import app.repository.HeroRepository;
 import app.repository.UserRepository;
@@ -9,6 +12,7 @@ import app.session.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 @Service
@@ -33,7 +37,9 @@ public class HeroService {
         this.modelMapper = modelMapper;
     }
 
-    public void create(CreateHeroService CreateHeroService) {
 
+    public HeroDTO createHero(HeroDTO heroDTO) {
+        Hero hero = modelMapper.map(heroDTO, Hero.class);
+        return modelMapper.map(heroRepository.save(hero), HeroDTO.class);
     }
 }

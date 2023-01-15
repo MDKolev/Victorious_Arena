@@ -1,5 +1,7 @@
 package app.domain.dto;
 
+import app.domain.entity.ClassEnum;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
@@ -14,12 +16,17 @@ public class HeroDTO {
     private String name;
 
     @Column(name = "class")
-    private String clazz;
+    private String heroClass;
 
     @Positive
     private int level;
 
-    public HeroDTO() {
+    public HeroDTO() {}
+
+    public HeroDTO(String name, String heroClass, int level) {
+        this.name = name;
+        this.heroClass = heroClass;
+        this.level = level;
     }
 
     public String getName() {
@@ -30,12 +37,12 @@ public class HeroDTO {
         this.name = name;
     }
 
-    public String getClazz() {
-        return clazz;
+    public String getHeroClass() {
+        return heroClass;
     }
 
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
+    public void setHeroClass(String heroClass) {
+        this.heroClass = heroClass;
     }
 
     public int getLevel() {

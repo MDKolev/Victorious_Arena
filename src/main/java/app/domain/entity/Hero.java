@@ -1,9 +1,10 @@
 package app.domain.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Hero {
+public class Hero  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

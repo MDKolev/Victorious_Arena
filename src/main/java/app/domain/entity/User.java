@@ -26,6 +26,8 @@ public class User extends Serializers.Base {
 
     private String roles;
 
+    public User() {
+    }
 
     public User(String username, String password, String email, String country, String roles) {
         this.username = username;
