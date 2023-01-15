@@ -75,4 +75,17 @@ public class HeroController {
     public String detailsArcher() {
         return "details-archer";
     }
+
+    @GetMapping("/hero/create/warrior")
+    public String createWarrior(@Valid Hero hero,
+                                Model model) {
+        model.addAttribute(new Hero());
+
+        heroRepository.save(hero);
+
+        return "create-warrior";
+    }
+
 }
+
+

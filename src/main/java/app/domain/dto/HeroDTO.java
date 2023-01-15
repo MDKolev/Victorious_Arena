@@ -29,9 +29,7 @@ public class HeroDTO {
         this.level = level;
     }
 
-    public String getName() {
-        return name;
-    }
+
 
     public void setName(String name) {
         this.name = name;
