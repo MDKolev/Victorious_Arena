@@ -1,19 +1,12 @@
 package app.service;
 
 import app.domain.dto.HeroDTO;
-import app.domain.dto.UserRegistrationDTO;
-import app.domain.entity.ClassEnum;
 import app.domain.entity.Hero;
-import app.domain.entity.User;
-import app.domain.service.CreateHeroService;
 import app.repository.HeroRepository;
 import app.repository.UserRepository;
 import app.session.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import java.io.Serializable;
-import java.util.Optional;
 
 @Service
 public class HeroService {
