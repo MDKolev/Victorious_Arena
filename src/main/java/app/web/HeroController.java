@@ -86,6 +86,24 @@ public class HeroController {
         return "create-warrior";
     }
 
-}
+    @GetMapping("/hero/create/archer")
+    public String createArcher(@Valid Hero hero,
+                                Model model) {
+        model.addAttribute(new Hero());
 
+        heroRepository.save(hero);
+
+        return "create-archer";
+    }
+
+    @GetMapping("/hero/create/mage")
+    public String createMage(@Valid Hero hero,
+                                Model model) {
+        model.addAttribute(new Hero());
+
+        heroRepository.save(hero);
+
+        return "create-mage";
+    }
+}
 
