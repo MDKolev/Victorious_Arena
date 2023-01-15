@@ -35,23 +35,8 @@ public class HeroController {
     }
 
     @GetMapping("/hero/create")
-    public String heroCreate(@Valid Hero hero,
-                             Model model) {
-        model.addAttribute("class", "Create Hero");
-        model.addAttribute(new Hero());
-        model.addAttribute("Classes", ClassEnum.values());
-
-        heroRepository.save(hero);
-
+    public String heroCreate() {
         return "create-hero";
-    }
-
-    @PostMapping("/hero/create")
-    public String createdHero(@ModelAttribute("") @Valid HeroDTO heroDTO) {
-
-        heroService.createHero(heroDTO);
-
-        return "details-hero";
     }
 
 
@@ -107,3 +92,22 @@ public class HeroController {
     }
 }
 
+/*@GetMapping("/hero/create")
+    public String heroCreate(@Valid Hero hero,
+                             Model model) {
+        model.addAttribute("class", "Create Hero");
+        model.addAttribute(new Hero());
+        model.addAttribute("Classes", ClassEnum.values());
+
+        heroRepository.save(hero);
+
+        return "create-hero";
+    }
+
+    @PostMapping("/hero/create")
+    public String createdHero(@ModelAttribute("") @Valid HeroDTO heroDTO) {
+
+        heroService.createHero(heroDTO);
+
+        return "details-hero";
+    }*/

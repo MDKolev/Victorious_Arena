@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface HeroRepository extends JpaRepository<Hero, Long> {
 
-    Optional<Hero> findByName(String name);
+    Optional<Hero> findByName(ClassEnum name);
 
 
 

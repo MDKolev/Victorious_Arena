@@ -18,8 +18,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-
     @GetMapping("/user/register")
     public String register(Model model) {
         UserRegistrationDTO registerUser = new UserRegistrationDTO();
