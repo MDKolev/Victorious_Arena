@@ -1,27 +1,28 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-    <a href="/home" class="navbar-brand text-white h4">Classes</a>
+    <a href="/" class="navbar-brand text-white h4">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-        <ul class="navbar-nav row w-25">
-            <li class="nav-item col-md-4">
-                <a class="nav-link text-white active h5" href="/home">Home</a>
-            </li>
-            <li class="nav-item col-md-4">
-                <a class="nav-link text-white active h5" href="/user/login">Login</a>
-            </li>
-            <li class="nav-item col-md-4">
-                <a class="nav-link text-white active h5" href="/user/register">Register</a>
-            </li>
-            <li class="nav-item col-md-4">
+    <div class="collapse navbar-collapse d-flex" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
                 <a class="nav-link text-white  active h5" href="/hero/create">Create Hero</a>
             </li>
-            <li class="nav-item col-md-4">
+            <li class="nav-item">
                 <a class="nav-link text-white  active h5" href="/hero/details">My Hero</a>
             </li>
-            <li class="nav-item col-md-4">
+        </ul>
+    </div>
+    <div class="collapse navbar-collapse d-flex justify-content-end">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link text-white active h5" href="/user/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white active h5" href="/user/register">Register</a>
+            </li>
+            <li class="nav-item">
                 <form>
                     <a class="nav-link text-white active h5" href="/logout">Logout</a>
                 </form>
