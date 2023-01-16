@@ -85,7 +85,6 @@ public class HeroController {
     public String createMage(@Valid Hero hero,
                                 Model model) {
         model.addAttribute(new Hero());
-
         heroRepository.save(hero);
 
         return "create-mage";
