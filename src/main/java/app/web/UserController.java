@@ -4,6 +4,7 @@ import app.domain.dto.UserLoginDTO;
 import app.domain.dto.UserRegistrationDTO;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,16 @@ public class UserController {
 
     @PostMapping("/user/register")
     public String registerUser(@ModelAttribute("user") @Valid UserRegistrationDTO userRegistrationDTO) {
-        userService.registerUser(userRegistrationDTO);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(userRegistrationDTO.getPassword());
+        userRegistrationDTO.setPassword(encodedPassword);
+
+        UserRegistrationDTO dbUser;
+        try {
+            dbUser = userService.registerUser(userRegistrationDTO);
+        } catch (Exception exception) {
+            return "user-exists";
+        }
 
         return "redirect:/user/login";
     }
@@ -45,6 +55,6 @@ public class UserController {
     public String loginUser(@ModelAttribute("user") @Valid UserLoginDTO userLoginDTO) {
         userService.loginUser(userLoginDTO);
 
-        return "redirect:/home";
+        return "logged-user";
     }
 }

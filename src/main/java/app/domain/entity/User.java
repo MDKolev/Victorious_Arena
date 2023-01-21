@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User extends Serializers.Base {
@@ -24,17 +26,14 @@ public class User extends Serializers.Base {
     @Column(nullable = false)
     private String country;
 
-    private String roles;
-
     public User() {
     }
 
-    public User(String username, String password, String email, String country, String roles) {
+    public User(String username, String password, String email, String country) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.country = country;
-        this.roles = roles;
     }
 
     public Long getId() {
@@ -77,11 +76,4 @@ public class User extends Serializers.Base {
         this.country = country;
     }
 
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
 }
