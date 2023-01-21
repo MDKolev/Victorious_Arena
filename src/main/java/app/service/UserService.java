@@ -25,18 +25,20 @@ public class UserService {
         this.currentUser = currentUser;
     }
 
-    public UserRegistrationDTO registerUser(UserRegistrationDTO userRegistrationDTO) {
-        User user = modelMapper.map(userRegistrationDTO, User.class);
+    public UserServiceModel registerUser(UserServiceModel userServiceModel) {
+        User user = modelMapper.map(userServiceModel, User.class);
 
-        return modelMapper.map(userRepository.save(user), UserRegistrationDTO.class);
+        return modelMapper.map(userRepository.save(user), UserServiceModel.class);
     }
 
-    public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserServiceModel findByUsernameAndPassword(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password)
+                .map(user -> modelMapper.map(user, UserServiceModel.class))
+                .orElse(null);
+
     }
-
-
-    public User loginUser(UserLoginDTO userLoginDTO) {
-        return null;
+    public void loginUser(Long id, String username) {
+        currentUser.setId(id);
+        currentUser.setUsername(username);
     }
 }

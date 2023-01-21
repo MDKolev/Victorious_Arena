@@ -12,20 +12,7 @@ public class CurrentUser {
 
     private String username;
 
-
-    public CurrentUser(long id, String username) {
-        this.id = id;
-        this.username = username;
-    }
-
-    public void login(User user) {
-        this.id = user.getId();
-        this.username = user.getUsername();
-    }
-
-    public void logout() {
-        this.id = 0;
-        this.username = null;
+    public CurrentUser() {
     }
 
     public long getId() {

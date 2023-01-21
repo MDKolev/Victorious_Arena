@@ -13,7 +13,7 @@ public class UserRegistrationDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Size(min = 3, max = 20)
+    @Size(min = 5, max = 20)
     @NotBlank
     private String username;
 

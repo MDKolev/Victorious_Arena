@@ -12,6 +12,9 @@ public class UserServiceModel {
     private String email;
     private String country;
 
+    public UserServiceModel() {
+    }
+
     public UserServiceModel(long id, String username, String password, String email, String country) {
         this.id = id;
         this.username = username;
