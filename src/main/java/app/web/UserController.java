@@ -4,6 +4,7 @@ import app.domain.dto.UserLoginDTO;
 import app.domain.dto.UserRegistrationDTO;
 import app.domain.service.UserServiceModel;
 import app.service.UserService;
+import app.session.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,10 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -24,9 +23,15 @@ public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-    public UserController(UserService userService, ModelMapper modelMapper) {
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    private final CurrentUser currentUser;
+
+    public UserController(UserService userService, ModelMapper modelMapper, BCryptPasswordEncoder passwordEncoder, CurrentUser currentUser) {
         this.userService = userService;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
+        this.currentUser = currentUser;
     }
 
     @GetMapping("/user/register")
@@ -77,6 +82,10 @@ public class UserController {
             return "redirect:login";
         }
 
+        BCryptPasswordEncoder matchedPassword = new BCryptPasswordEncoder();
+        matchedPassword.matches(userLoginDTO.getPassword(), userService.findByPassword(userLoginDTO.getPassword()));
+
+
         UserServiceModel userServiceModel = userService
                 .findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
 
@@ -88,19 +97,18 @@ public class UserController {
             return "redirect:login";
         }
 
-        //TODO login user
         userService.loginUser(userServiceModel.getId(), userLoginDTO.getUsername());
+
 
         return "redirect:/";
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession httpSession){
-        httpSession.invalidate();
+    public String logout(){
+        this.userService.logout();
 
         return "redirect:/";
     }
-
     @ModelAttribute
     public UserRegistrationDTO userRegistrationDTO(){
         return new UserRegistrationDTO();

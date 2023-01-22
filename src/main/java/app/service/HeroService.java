@@ -3,6 +3,8 @@ package app.service;
 import app.domain.dto.HeroDTO;
 import app.domain.entity.ClassEnum;
 import app.domain.entity.Hero;
+import app.domain.service.CreateHeroService;
+import app.domain.service.HeroServiceModel;
 import app.repository.HeroRepository;
 import app.repository.UserRepository;
 import app.session.CurrentUser;
@@ -32,9 +34,9 @@ public class HeroService {
     }
 
 
-    public HeroDTO createHero(HeroDTO heroDTO) {
-        Hero hero = modelMapper.map(heroDTO, Hero.class);
-        return modelMapper.map(heroRepository.save(hero), HeroDTO.class);
+    public void createHero(CreateHeroService createHeroService) {
+        Hero hero = modelMapper.map(createHeroService, Hero.class);
+        modelMapper.map(heroRepository.save(hero), HeroServiceModel.class);
     }
 
     public Hero findByClass(ClassEnum classEnum) {

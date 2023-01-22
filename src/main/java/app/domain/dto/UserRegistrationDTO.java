@@ -63,25 +63,4 @@ public class UserRegistrationDTO {
         return confirmPassword;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    @Override
-    public String toString() {
-        return  " id = " + id + '\'' +
-                " Username = " + username + '\'' +
-                " Email = " + email + '\'' +
-                 "Password = " + password + '\'' +
-                " ConfirmPassword = '" + confirmPassword + '\'' +
-                " Country= " + country ;
-    }
 }

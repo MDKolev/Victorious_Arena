@@ -7,6 +7,7 @@ import app.repository.HeroRepository;
 import app.repository.UserRepository;
 import app.service.HeroService;
 import app.session.CurrentUser;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,13 @@ import java.util.List;
 @Controller
 public class HeroController {
 
+    private final ModelMapper modelMapper;
+
+    public HeroController(ModelMapper modelMapper, HeroRepository heroRepository, HeroService heroService) {
+        this.modelMapper = modelMapper;
+        this.heroRepository = heroRepository;
+        this.heroService = heroService;
+    }
 
     @Autowired
     private HeroRepository heroRepository;
@@ -46,6 +54,7 @@ public class HeroController {
 
     }
 
+
     @GetMapping("/details/warrior")
     public String detailsWarrior() {
         return "details-warrior";
@@ -70,6 +79,7 @@ public class HeroController {
 
         return "create-warrior";
     }
+
 
     @GetMapping("/hero/create/archer")
     public String createArcher(@Valid Hero hero,
@@ -109,4 +119,16 @@ public class HeroController {
         heroService.createHero(heroDTO);
 
         return "details-hero";
+    }*/
+
+/*
+    @GetMapping("/details/{heroClass}")
+    public String details(String heroClass) {
+        return switch (heroClass) {
+            case "mage" -> "details-mage";
+            case "warrior" -> "details-warrior";
+            case "archer" -> "details-archer";
+            default -> "error-page";
+        };
+
     }*/

@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title> Victorious Arena </title>
-    <th:block th:replace="~{fragments/head}"></th:block>
-</head>
+<head th:replace="fragments/commons::head"></head>
 <body>
-<header th:include="~{fragments/navigation}"></header>
+<header th:replace="fragments/commons::navigation"></header>
 <main>
     <div class="text-center mb-3">
         <h4 class="text-white mt-2">Choose Your Fighter </h4>
@@ -33,6 +30,6 @@
             </div>
         </div>
 </main>
-<th:block th:replace="~{fragments/footer}" />
+<footer th:replace="fragments/commons::footer"/></footer>
 </body>
 </html>

@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <th:block th:replace="~{fragments/head}"></th:block>
-</head>
+<head th:replace="fragments/commons::head"> </head>
 <body>
-<header th:include="~{fragments/navigation}"></header>
+<header th:replace="fragments/commons::navigation"></header>
 <main>
     <div class="text-center mt-2 mb-4">
         <h1>MAGE</h1>
@@ -19,8 +17,6 @@
                 </div>
             </div>
 </main>
-<footer class="footer bg-dark  py-2">
-    <th:block th:replace="~{fragments/footer}" />
-</footer>
+<footer th:replace="fragments/commons::footer"/></footer>
 </body>
 </html>

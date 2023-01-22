@@ -43,9 +43,19 @@ public class UserService {
                   .orElse(null);
 
       }
+
     public void loginUser(Long id, String username) {
         currentUser.setId(id);
         currentUser.setUsername(username);
     }
 
+    public void logout() {
+        currentUser.setId(0);
+        currentUser.setUsername(null);
+    }
+
+
+    public String findByPassword(String password) {
+        return userRepository.findByPassword(password).toString();
+    }
 }

@@ -15,11 +15,7 @@ public class HeroServiceModel {
 
     private int level;
 
-    public HeroServiceModel(Long id, String name, ClassEnum heroClass, int level) {
-        this.id = id;
-        this.name = name;
-        this.heroClass = heroClass;
-        this.level = level;
+    public HeroServiceModel() {
     }
 
     public Long getId() {

@@ -15,14 +15,6 @@ public class UserServiceModel {
     public UserServiceModel() {
     }
 
-    public UserServiceModel(long id, String username, String password, String email, String country) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.country = country;
-    }
-
     public long getId() {
         return id;
     }

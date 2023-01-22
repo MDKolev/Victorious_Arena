@@ -8,11 +8,9 @@ private String heroClass;
 
 private int level;
 
-    public CreateHeroService(String name, String heroClass, int level) {
-        this.name = name;
-        this.heroClass = heroClass;
-        this.level = level;
+    public CreateHeroService() {
     }
+
 
     public String getName() {
         return name;

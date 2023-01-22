@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <th:block th:replace="~{fragments/head}"></th:block>
-</head>
+<head th:replace="fragments/commons::head"> </head>
 <body>
-<header th:include="~{fragments/navigation}"></header>
+<header th:replace="fragments/commons::navigation"></header>
 <main>
     <div class="container">
         <h1 >Welcome to Victorious Arena</h1>
@@ -13,6 +11,6 @@
         <p class="h4">You will find many strong enemies, but only the best will survive.</p>
     </div>
 </main>
-<th:block th:replace="~{fragments/footer}" />
+<footer th:replace="fragments/commons::footer"/></footer>
 </body>
 </html>
