@@ -2,6 +2,8 @@
 
 First project
 
+Status: incomplete
+
 Things to be implement:
  - login form, current user, logout
  - create hero
