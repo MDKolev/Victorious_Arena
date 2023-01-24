@@ -20,6 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByPassword(String password);
 
-
+    Optional<User> findByUsername(String username);
 }
  //     @Query("SELECT username, password FROM projectmyheroes.user")

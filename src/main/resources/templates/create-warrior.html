@@ -6,7 +6,7 @@
 <main>
     <h1 class="text-center mt-2">Create Warrior</h1>
     <hr class="hr-3"/>
-    <form class="mx-auto w-15" th:action="@{/hero/details}" th:object="${hero}">
+    <form class="mx-auto w-15" th:action="@{/hero/details}" th:object="${model}">
         <div class="form-group">
             <img th:src="@{/images/warrior.jpg}" class="img-thumb" width="300" height="300"/>
             <div class="text-white label-holder d-flex justify-content-center">

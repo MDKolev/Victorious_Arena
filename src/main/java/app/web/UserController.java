@@ -2,6 +2,7 @@ package app.web;
 
 import app.domain.dto.UserLoginDTO;
 import app.domain.dto.UserRegistrationDTO;
+import app.domain.entity.User;
 import app.domain.service.UserServiceModel;
 import app.service.UserService;
 import app.session.CurrentUser;
@@ -35,20 +36,20 @@ public class UserController {
     }
 
     @GetMapping("/user/register")
-    public String register(){
+    public String register() {
         return "register";
     }
 
     @PostMapping("/user/register")
     public String registerConfirm(@Valid UserRegistrationDTO userRegistrationDTO,
                                   BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes){
+                                  RedirectAttributes redirectAttributes) {
 
-        if(bindingResult.hasErrors() ||
+        if (bindingResult.hasErrors() ||
                 !userRegistrationDTO.getPassword()
-                        .equals(userRegistrationDTO.getConfirmPassword())){
-            redirectAttributes.addFlashAttribute("userRegistrationDTO",userRegistrationDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO",bindingResult);
+                        .equals(userRegistrationDTO.getConfirmPassword())) {
+            redirectAttributes.addFlashAttribute("userRegistrationDTO", userRegistrationDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDTO", bindingResult);
 
             return "redirect:register";
         }
@@ -63,60 +64,56 @@ public class UserController {
     }
 
     @GetMapping("/user/login")
-    public String login(Model model){
-        if (!model.containsAttribute("isFound")){
-            model.addAttribute("isFound", true);
-        }
-
+    public String login() {
         return "login";
     }
 
     @PostMapping("/user/login")
     public String loginConfirm(@Valid UserLoginDTO userLoginDTO,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes){
-        if(bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("userLoginDTO",userLoginDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginDTO",bindingResult);
+                               RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userLoginDTO", userLoginDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
+
+            return "redirect:login";
+        }
+
+        UserServiceModel userServiceModel = userService.findByUsername(userLoginDTO.getUsername());
+        if (userServiceModel == null) {
+            redirectAttributes.addFlashAttribute("userLoginDTO", userLoginDTO);
+            redirectAttributes.addFlashAttribute("isFound", false);
 
             return "redirect:login";
         }
 
         BCryptPasswordEncoder matchedPassword = new BCryptPasswordEncoder();
-        matchedPassword.matches(userLoginDTO.getPassword(), userService.findByPassword(userLoginDTO.getPassword()));
+        boolean matches = matchedPassword.matches(userLoginDTO.getPassword(), userServiceModel.getPassword());
 
+        if(matches) {
+            userService.loginUser(userServiceModel.getId(), userLoginDTO.getUsername());
 
-        UserServiceModel userServiceModel = userService
-                .findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
-
-
-        if(userServiceModel == null){
-            redirectAttributes.addFlashAttribute("userLoginDTO",userLoginDTO);
-            redirectAttributes.addFlashAttribute("isFound",false);
-
-            return "redirect:login";
+            return "redirect:/";
         }
 
-        userService.loginUser(userServiceModel.getId(), userLoginDTO.getUsername());
-
-
-        return "redirect:/";
+        return "redirect:login";
     }
 
     @GetMapping("/logout")
-    public String logout(){
+    public String logout() {
         this.userService.logout();
 
         return "redirect:/";
     }
+
     @ModelAttribute
-    public UserRegistrationDTO userRegistrationDTO(){
+    public UserRegistrationDTO userRegistrationDTO() {
         return new UserRegistrationDTO();
     }
 
 
     @ModelAttribute
-    public UserLoginDTO userLoginDTO(){
+    public UserLoginDTO userLoginDTO() {
         return new UserLoginDTO();
     }
 

@@ -34,9 +34,9 @@ public class HeroService {
     }
 
 
-    public void createHero(CreateHeroService createHeroService) {
-        Hero hero = modelMapper.map(createHeroService, Hero.class);
-        modelMapper.map(heroRepository.save(hero), HeroServiceModel.class);
+    public void createHero(HeroDTO heroDTO) {
+        Hero hero = modelMapper.map(heroDTO, Hero.class);
+        heroRepository.save(hero);
     }
 
     public Hero findByClass(ClassEnum classEnum) {

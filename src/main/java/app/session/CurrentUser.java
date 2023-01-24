@@ -8,14 +8,14 @@ import org.springframework.web.context.annotation.SessionScope;
 @SessionScope
 public class CurrentUser {
 
-    private long id;
+    private Long id;
 
     private String username;
 
     public CurrentUser() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -23,7 +23,7 @@ public class CurrentUser {
         return username;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
