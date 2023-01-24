@@ -21,19 +21,15 @@ public class UserService {
 
     private final CurrentUser currentUser;
 
-    @Autowired
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, CurrentUser currentUser, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, CurrentUser currentUser) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.currentUser = currentUser;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
         User user = modelMapper.map(userServiceModel, User.class);
-
         return modelMapper.map(userRepository.save(user), UserServiceModel.class);
     }
 

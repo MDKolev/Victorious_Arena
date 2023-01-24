@@ -23,7 +23,7 @@ public class HeroDTO {
     private String heroClass;
 
     @Positive
-    private int level;
+    private int level = 1;
 
     public HeroDTO() {}
 

@@ -9,6 +9,7 @@ import app.service.HeroService;
 import app.session.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,6 +52,21 @@ public class HeroController {
     @GetMapping("/hero/details")
     public String heroDetails() {
         return "details-hero";
+    }
+
+    @PostMapping("/hero/details")
+    public String heroDetailz() {
+        return "details-hero";
+    }
+
+    @GetMapping("/details/{heroClass}")
+    public String details(@PathVariable String heroClass) {
+        return switch (heroClass) {
+            case "mage" -> "details-mage";
+            case "warrior" -> "details-warrior";
+            case "archer" -> "details-archer";
+            default -> "error-page";
+        };
 
     }
 
@@ -77,12 +93,12 @@ public class HeroController {
         return "create-warrior";
     }
 
-    @PostMapping("/hero/create")
+    @PostMapping("/hero/create/warrior")
     public String createdHero(@Valid HeroDTO heroDTO) {
 
         heroService.createHero(heroDTO);
 
-        return "details-hero";
+        return "redirect:/hero/details";
     }
 
 
@@ -121,14 +137,4 @@ public class HeroController {
     */
 // changes
 
-    @GetMapping("/details/{heroClass}")
-    public String details(@PathVariable String heroClass) {
-        return switch (heroClass) {
-            case "mage" -> "details-mage";
-            case "warrior" -> "details-warrior";
-            case "archer" -> "details-archer";
-            default -> "error-page";
-        };
-
-    }
 }
