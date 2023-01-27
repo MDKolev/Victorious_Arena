@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService {
 
@@ -21,11 +19,14 @@ public class UserService {
 
     private final CurrentUser currentUser;
 
+    @Autowired
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, CurrentUser currentUser) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, CurrentUser currentUser, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.currentUser = currentUser;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {

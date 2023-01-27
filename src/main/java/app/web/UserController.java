@@ -64,7 +64,11 @@ public class UserController {
     }
 
     @GetMapping("/user/login")
-    public String login() {
+    public String login(Model model){
+        if (!model.containsAttribute("isFound")){
+            model.addAttribute("isFound", true);
+        }
+
         return "login";
     }
 
@@ -88,7 +92,8 @@ public class UserController {
         }
 
         BCryptPasswordEncoder matchedPassword = new BCryptPasswordEncoder();
-        boolean matches = matchedPassword.matches(userLoginDTO.getPassword(), userServiceModel.getPassword());
+        String encode = passwordEncoder.encode(userLoginDTO.getPassword());
+        boolean matches = matchedPassword.matches(encode, userServiceModel.getPassword());
 
         if(matches) {
             userService.loginUser(userServiceModel.getId(), userLoginDTO.getUsername());

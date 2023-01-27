@@ -95,6 +95,22 @@ public class HeroController {
 
     @PostMapping("/hero/create/warrior")
     public String createdHero(@Valid HeroDTO heroDTO) {
+        String warriorClass = ClassEnum.WARRIOR.getHeroClass();
+        heroDTO.setHeroClass(warriorClass);
+        heroService.createHero(heroDTO);
+
+        return "redirect:/hero/details";
+    }
+
+    @GetMapping("/hero/create/archer")
+    public String createArcher(Model model) {
+        model.addAttribute("model", new Hero());
+
+        return "create-archer";
+    }
+
+    @PostMapping("/hero/create/archer")
+    public String createdArcher(@Valid HeroDTO heroDTO) {
 
         heroService.createHero(heroDTO);
 
@@ -102,23 +118,20 @@ public class HeroController {
     }
 
 
-    @GetMapping("/hero/create/archer")
-    public String createArcher(@Valid Hero hero,
-                               Model model) {
-        model.addAttribute(new Hero());
-
-        heroRepository.save(hero);
-
-        return "create-archer";
-    }
 
     @GetMapping("/hero/create/mage")
-    public String createMage(@Valid Hero hero,
-                             Model model) {
-        model.addAttribute(new Hero());
-        heroRepository.save(hero);
+    public String createMage(Model model) {
+        model.addAttribute("model", new Hero());
 
         return "create-mage";
+    }
+
+    @PostMapping("/hero/create/mage")
+    public String createdMage(@Valid HeroDTO heroDTO) {
+
+        heroService.createHero(heroDTO);
+
+        return "redirect:/hero/details";
     }
 
 

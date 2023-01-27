@@ -31,7 +31,6 @@ public class HeroService {
         this.modelMapper = modelMapper;
     }
 
-
     public void createHero(HeroDTO heroDTO) {
         Hero hero = modelMapper.map(heroDTO, Hero.class);
         heroRepository.save(hero);

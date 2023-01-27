@@ -17,4 +17,6 @@ public enum ClassEnum {
     public String getHeroClass() {
         return heroClass;
     }
+
+
 }
