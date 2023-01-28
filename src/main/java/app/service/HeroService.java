@@ -45,16 +45,16 @@ public class HeroService {
         return heroRepository.findByName(classEnum).orElse(null);
     }
 
-    public List<Hero> findAllHeroes() {
-        return heroRepository.findAll();
+    public Page<Hero> findPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 5);
+        return heroRepository.findAll(pageable);
     }
 
-    public Page<Hero> findHeroesWithPagination(int offset, int page){
-        Page<Hero> heroes = heroRepository.findAll(PageRequest.of(offset, page));
-        return heroes;
+    public List<Hero> findByUsername(String username) {
+        return heroRepository.findByName(username);
     }
-    public Page<Hero> findPaginated(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        return this.heroRepository.findAll(pageable);
+
+    public List<Hero> findAll() {
+        return heroRepository.findAll();
     }
 }

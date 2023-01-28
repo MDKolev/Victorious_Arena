@@ -9,6 +9,9 @@ import app.service.HeroService;
 import app.session.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,11 +52,45 @@ public class HeroController {
     }
 
 
-    @GetMapping("/hero/details")
-    public String heroDetails(Model model) {
-        model.addAttribute("heroes", heroService.findAllHeroes());
+  /*  @GetMapping("/hero/details")
+    public String getAll(Model model, String username) {
+        List<Hero> heroes;
+        heroes = username == null ? heroService.findAll() : heroService.findByUsername(username);
+        model.addAttribute("heroes", heroes);
         return "details-hero";
+
+    }*/
+
+    @GetMapping("/hero/details")
+    public String getHeroDetails(Model model, @RequestParam(required = false) String username,
+                         @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+        try {
+            List<Hero> heroes = new ArrayList<Hero>();
+            Pageable paging = PageRequest.of(page - 1, size);
+
+            Page<Hero> pageTuts;
+            if (username == null) {
+                pageTuts = heroRepository.findAll(paging);
+            } else {
+                pageTuts = heroRepository.findByNameIgnoreCase(username, paging);
+                model.addAttribute("username", username);
+            }
+
+            heroes = pageTuts.getContent();
+
+            model.addAttribute("heroes", heroes);
+            model.addAttribute("currentPage", pageTuts.getNumber() + 1);
+            model.addAttribute("totalItems", pageTuts.getTotalElements());
+            model.addAttribute("totalPages", pageTuts.getTotalPages());
+            model.addAttribute("pageSize", size);
+        } catch (Exception e) {
+            model.addAttribute("message", e.getMessage());
+        }
+
+        return "details-heroes";
+
     }
+
 
     @PostMapping("/hero/details")
     public String listHeroDetails() {
