@@ -171,6 +171,11 @@ public class HeroController {
         return "redirect:/hero/details";
     }
 
+    @GetMapping("hero/delete/{id}")
+    public String deleteHero(@PathVariable("id") Long id) {
+        heroRepository.deleteById(id);
+        return "redirect:/hero/details";
+    }
 
 /*@GetMapping("/hero/create")
     public String heroCreate(@Valid Hero hero,
