@@ -50,12 +50,13 @@ public class HeroController {
 
 
     @GetMapping("/hero/details")
-    public String heroDetails() {
+    public String heroDetails(Model model) {
+        model.addAttribute("heroes", heroService.findAllHeroes());
         return "details-hero";
     }
 
     @PostMapping("/hero/details")
-    public String heroDetailz() {
+    public String listHeroDetails() {
         return "details-hero";
     }
 
@@ -116,7 +117,6 @@ public class HeroController {
 
         return "redirect:/hero/details";
     }
-
 
 
     @GetMapping("/hero/create/mage")

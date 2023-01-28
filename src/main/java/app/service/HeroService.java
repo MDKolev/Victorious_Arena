@@ -7,7 +7,12 @@ import app.repository.HeroRepository;
 import app.repository.UserRepository;
 import app.session.CurrentUser;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class HeroService {
@@ -38,5 +43,18 @@ public class HeroService {
 
     public Hero findByClass(ClassEnum classEnum) {
         return heroRepository.findByName(classEnum).orElse(null);
+    }
+
+    public List<Hero> findAllHeroes() {
+        return heroRepository.findAll();
+    }
+
+    public Page<Hero> findHeroesWithPagination(int offset, int page){
+        Page<Hero> heroes = heroRepository.findAll(PageRequest.of(offset, page));
+        return heroes;
+    }
+    public Page<Hero> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.heroRepository.findAll(pageable);
     }
 }
