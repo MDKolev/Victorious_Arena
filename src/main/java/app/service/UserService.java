@@ -19,7 +19,6 @@ public class UserService {
 
     private final CurrentUser currentUser;
 
-    @Autowired
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserService(UserRepository userRepository, ModelMapper modelMapper, CurrentUser currentUser, BCryptPasswordEncoder bCryptPasswordEncoder) {

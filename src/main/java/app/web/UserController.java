@@ -54,7 +54,6 @@ public class UserController {
             return "redirect:register";
         }
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(userRegistrationDTO.getPassword());
         userRegistrationDTO.setPassword(encodedPassword);
 
@@ -91,10 +90,7 @@ public class UserController {
             return "redirect:login";
         }
 
-        BCryptPasswordEncoder matchedPassword = new BCryptPasswordEncoder();
-        String encode = passwordEncoder.encode(userLoginDTO.getPassword());
-        boolean matches = matchedPassword.matches(encode, userServiceModel.getPassword());
-
+        boolean matches = passwordEncoder.matches(userLoginDTO.getPassword(), userServiceModel.getPassword());
         if(matches) {
             userService.loginUser(userServiceModel.getId(), userLoginDTO.getUsername());
 

@@ -87,7 +87,7 @@ public class HeroController {
             model.addAttribute("message", e.getMessage());
         }
 
-        return "details-heroes";
+        return "details-hero";
 
     }
 
@@ -124,6 +124,7 @@ public class HeroController {
 //        return "details-archer";
 //    }
 
+
     @GetMapping("/hero/create/warrior")
     public String createWarrior(Model model) {
         model.addAttribute("model", new Hero());
@@ -133,8 +134,7 @@ public class HeroController {
 
     @PostMapping("/hero/create/warrior")
     public String createdHero(@Valid HeroDTO heroDTO) {
-        String warriorClass = ClassEnum.WARRIOR.getHeroClass();
-        heroDTO.setHeroClass(warriorClass);
+        heroDTO.setHeroClass(ClassEnum.WARRIOR);
         heroService.createHero(heroDTO);
 
         return "redirect:/hero/details";
@@ -171,11 +171,25 @@ public class HeroController {
         return "redirect:/hero/details";
     }
 
-    @GetMapping("hero/delete/{id}")
+    @GetMapping("/hero/delete/{id}")
     public String deleteHero(@PathVariable("id") Long id) {
         heroRepository.deleteById(id);
         return "redirect:/hero/details";
     }
+
+    @GetMapping("/hero/rename/{id}")
+    String renameHero(@PathVariable("id") Long id, String name) {
+        heroService.renameHero(id, name);
+        return "redirect:/hero/details";
+    }
+
+    @GetMapping("/hero/train/{id}")
+    String trainHero(@PathVariable("id") Long id) {
+        heroService.getHero(id);
+
+        return "train-hero";
+    }
+
 
 /*@GetMapping("/hero/create")
     public String heroCreate(@Valid Hero hero,

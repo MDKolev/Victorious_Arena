@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HeroService {
@@ -54,7 +55,19 @@ public class HeroService {
         return heroRepository.findByName(username);
     }
 
+    public void renameHero(Long id, String username) {
+        Optional<Hero> byId = heroRepository.findById(id);
+        byId.get().setName(username);
+
+    }
+
     public List<Hero> findAll() {
         return heroRepository.findAll();
+    }
+
+    public Hero getHero(Long id) {
+        Optional<Hero> byId = heroRepository.findById(id);
+       return byId.get();
+
     }
 }

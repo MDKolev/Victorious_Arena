@@ -29,8 +29,6 @@ public class Hero  {
         this.level = level;
     }
 
-
-
     public Long getId() {
         return id;
     }

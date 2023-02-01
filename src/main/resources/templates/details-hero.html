@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/commons::head"></head>
 <body>
 <header th:replace="fragments/commons::navigation"></header>
@@ -8,12 +8,12 @@
         <h1>My Heroes</h1>
     </div>
     <hr class="my-3"/>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
+    <div class="container-fluid text-center">
+        <div class="row row-cols-4 justify-content-center">
             <div class="col-md-7">
-                <div class="col-md-12" th:if="${not#lists.isEmpty(heroes)}">
-                    <table class="table table-dark">
-                        <thead>
+                <div class="col-md-12" th:if="${heroes.size() > 0}">
+                    <table class="table">
+                        <thead class="table-dark">
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Class</th>
@@ -21,30 +21,31 @@
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="table">
                         <tr th:each="hero : ${heroes}">
                             <td th:text="${hero.name}"></td>
                             <td th:text="warrior"></td>
                             <td th:text="${hero.level}"></td>
-                            <td class="d-grid gap-2 d-md-flex">
+                            <td class="text-center">
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                    <button type="button" class="btn btn-primary btn-sm">Train</button>
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                    <a th:href="@{/hero/train/{id}(id=${hero.id})}" type="button"
+                                       class="btn btn-primary btn-sm">Train</a>
+                                    <a th:href="@{/hero/delete/{id}(id=${hero.id})}" type="button"
+                                       class="btn btn-danger btn-sm">Delete</a>
+                                    <a th:href="@{/hero/rename/{id}(id=${hero.id})}" type="button"
+                                       class="btn btn-warning btn-sm">Rename</a>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation example" class="pagination-primary">
-                    <ul class="pagination pagination-sm justify-content-center">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
+
+                <div th:unless="${heroes.size() > 0}">
+                    <span>No heroes found!</span>
+                </div>
+                <a th:include="fragments/pagination" ></a>
+
             </div>
         </div>
     </div>

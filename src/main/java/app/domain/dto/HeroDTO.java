@@ -15,14 +15,14 @@ public class HeroDTO {
     private String name;
 
     @Column(name = "class")
-    private String heroClass;
+    private ClassEnum heroClass;
 
     @Positive
     private int level = 1;
 
     public HeroDTO() {}
 
-    public HeroDTO(String name, String heroClass, int level) {
+    public HeroDTO(String name, ClassEnum heroClass, int level) {
         this.name = name;
         this.heroClass = heroClass;
         this.level = level;
@@ -37,11 +37,11 @@ public class HeroDTO {
         this.name = name;
     }
 
-    public String getHeroClass() {
+    public ClassEnum getHeroClass() {
         return heroClass;
     }
 
-    public void setHeroClass(String heroClass) {
+    public void setHeroClass(ClassEnum heroClass) {
         this.heroClass = heroClass;
     }
 
