@@ -32,8 +32,8 @@ public class UserRegistrationDTO {
     @NotBlank
     private String country;
 
-    public UserRegistrationDTO() {}
-
+    public UserRegistrationDTO() {
+    }
 
     public String getUsername() {
         return username;

@@ -17,8 +17,7 @@ public class HeroDTO {
     @Column(name = "class")
     private ClassEnum heroClass;
 
-    @Positive
-    private int level = 1;
+    private int level;
 
     public HeroDTO() {}
 

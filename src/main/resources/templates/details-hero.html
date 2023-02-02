@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/commons::head"></head>
 <body>
 <header th:replace="fragments/commons::navigation"></header>
@@ -24,7 +24,7 @@
                         <tbody class="table">
                         <tr th:each="hero : ${heroes}">
                             <td th:text="${hero.name}"></td>
-                            <td th:text="warrior"></td>
+                            <td th:text="${hero.heroClass}"></td>
                             <td th:text="${hero.level}"></td>
                             <td class="text-center">
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
@@ -44,7 +44,7 @@
                 <div th:unless="${heroes.size() > 0}">
                     <span>No heroes found!</span>
                 </div>
-                <a th:include="fragments/pagination" ></a>
+                <a th:include="fragments/pagination"></a>
 
             </div>
         </div>

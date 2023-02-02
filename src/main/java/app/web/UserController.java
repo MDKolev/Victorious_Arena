@@ -2,7 +2,6 @@ package app.web;
 
 import app.domain.dto.UserLoginDTO;
 import app.domain.dto.UserRegistrationDTO;
-import app.domain.entity.User;
 import app.domain.service.UserServiceModel;
 import app.service.UserService;
 import app.session.CurrentUser;
@@ -63,8 +62,8 @@ public class UserController {
     }
 
     @GetMapping("/user/login")
-    public String login(Model model){
-        if (!model.containsAttribute("isFound")){
+    public String login(Model model) {
+        if (!model.containsAttribute("isFound")) {
             model.addAttribute("isFound", true);
         }
 
@@ -91,7 +90,7 @@ public class UserController {
         }
 
         boolean matches = passwordEncoder.matches(userLoginDTO.getPassword(), userServiceModel.getPassword());
-        if(matches) {
+        if (matches) {
             userService.loginUser(userServiceModel.getId(), userLoginDTO.getUsername());
 
             return "redirect:/";

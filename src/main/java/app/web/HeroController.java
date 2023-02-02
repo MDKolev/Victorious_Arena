@@ -4,20 +4,15 @@ import app.domain.dto.HeroDTO;
 import app.domain.entity.ClassEnum;
 import app.domain.entity.Hero;
 import app.repository.HeroRepository;
-import app.repository.UserRepository;
 import app.service.HeroService;
-import app.session.CurrentUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -51,19 +46,9 @@ public class HeroController {
         return "create-hero";
     }
 
-
-  /*  @GetMapping("/hero/details")
-    public String getAll(Model model, String username) {
-        List<Hero> heroes;
-        heroes = username == null ? heroService.findAll() : heroService.findByUsername(username);
-        model.addAttribute("heroes", heroes);
-        return "details-hero";
-
-    }*/
-
     @GetMapping("/hero/details")
     public String getHeroDetails(Model model, @RequestParam(required = false) String username,
-                         @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
+                                 @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size) {
         try {
             List<Hero> heroes = new ArrayList<Hero>();
             Pageable paging = PageRequest.of(page - 1, size);
@@ -91,7 +76,6 @@ public class HeroController {
 
     }
 
-
     @PostMapping("/hero/details")
     public String listHeroDetails() {
         return "details-hero";
@@ -100,74 +84,42 @@ public class HeroController {
     @GetMapping("/details/{heroClass}")
     public String details(@PathVariable String heroClass) {
         return switch (heroClass) {
-            case "mage" -> "details-mage";
             case "warrior" -> "details-warrior";
             case "archer" -> "details-archer";
+            case "mage" -> "details-mage";
             default -> "error-page";
         };
 
     }
 
-
-//    @GetMapping("/details/warrior")
-//    public String detailsWarrior() {
-//        return "details-warrior";
-//    }
-
-//    @GetMapping("/details/mage")
-//    public String detailsMage() {
-//        return "details-mage";
-//    }
-
-//    @GetMapping("/details/archer")
-//    public String detailsArcher() {
-//        return "details-archer";
-//    }
-
-
-    @GetMapping("/hero/create/warrior")
-    public String createWarrior(Model model) {
+    @GetMapping("/hero/create/{heroClass}")
+    public String createWarrior(Model model, @PathVariable String heroClass) {
         model.addAttribute("model", new Hero());
-//        model.addAttribute(new Hero());
-        return "create-warrior";
+        return switch (heroClass) {
+            case "warrior" -> "create-warrior";
+            case "archer" -> "create-archer";
+            case "mage" -> "create-mage";
+            default -> "error-page";
+        };
     }
 
-    @PostMapping("/hero/create/warrior")
-    public String createdHero(@Valid HeroDTO heroDTO) {
-        heroDTO.setHeroClass(ClassEnum.WARRIOR);
+    @PostMapping("/hero/create/{spec}")
+    public String createdHero(@PathVariable String spec, @Valid HeroDTO heroDTO) {
+        switch (spec) {
+            case "warrior" -> {
+                heroDTO.setHeroClass(ClassEnum.WARRIOR);
+                heroDTO.setLevel(1);
+            }
+            case "archer" -> {
+                heroDTO.setHeroClass(ClassEnum.ARCHER);
+                heroDTO.setLevel(1);
+            }
+            case "mage" -> {
+                heroDTO.setHeroClass(ClassEnum.MAGE);
+                heroDTO.setLevel(1);
+            }
+        }
         heroService.createHero(heroDTO);
-
-        return "redirect:/hero/details";
-    }
-
-    @GetMapping("/hero/create/archer")
-    public String createArcher(Model model) {
-        model.addAttribute("model", new Hero());
-
-        return "create-archer";
-    }
-
-    @PostMapping("/hero/create/archer")
-    public String createdArcher(@Valid HeroDTO heroDTO) {
-
-        heroService.createHero(heroDTO);
-
-        return "redirect:/hero/details";
-    }
-
-
-    @GetMapping("/hero/create/mage")
-    public String createMage(Model model) {
-        model.addAttribute("model", new Hero());
-
-        return "create-mage";
-    }
-
-    @PostMapping("/hero/create/mage")
-    public String createdMage(@Valid HeroDTO heroDTO) {
-
-        heroService.createHero(heroDTO);
-
         return "redirect:/hero/details";
     }
 
@@ -189,21 +141,5 @@ public class HeroController {
 
         return "train-hero";
     }
-
-
-/*@GetMapping("/hero/create")
-    public String heroCreate(@Valid Hero hero,
-                             Model model) {
-        model.addAttribute("class", "Create Hero");
-        model.addAttribute(new Hero());
-        model.addAttribute("Classes", ClassEnum.values());
-
-        heroRepository.save(hero);
-
-        return "create-hero";
-    }
-
-    */
-// changes
 
 }

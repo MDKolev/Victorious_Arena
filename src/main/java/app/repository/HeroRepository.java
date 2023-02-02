@@ -14,11 +14,7 @@ import java.util.Optional;
 @Repository
 public interface HeroRepository extends JpaRepository<Hero, Long> {
 
-    Optional<Hero> findByName(ClassEnum name);
-
     Page<Hero> findByNameIgnoreCase(String username, Pageable pageable);
-
-    List<Hero> findByName(String username);
 
 
 }

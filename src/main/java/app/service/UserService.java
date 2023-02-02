@@ -39,12 +39,6 @@ public class UserService {
                 .orElse(null);
     }
 
-      public UserServiceModel findByUsernameAndPassword(String username, String password) {
-          return userRepository.findByUsernameAndPassword(username, password)
-                  .map(user -> modelMapper.map(user, UserServiceModel.class))
-                  .orElse(null);
-
-      }
 
     public void loginUser(Long id, String username) {
         currentUser.setId(id);
@@ -58,7 +52,4 @@ public class UserService {
     }
 
 
-    public String findByPassword(String password) {
-        return userRepository.findByPassword(password).toString();
-    }
 }

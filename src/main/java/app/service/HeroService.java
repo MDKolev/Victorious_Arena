@@ -42,17 +42,10 @@ public class HeroService {
         heroRepository.save(hero);
     }
 
-    public Hero findByClass(ClassEnum classEnum) {
-        return heroRepository.findByName(classEnum).orElse(null);
-    }
 
     public Page<Hero> findPage(int pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 5);
         return heroRepository.findAll(pageable);
-    }
-
-    public List<Hero> findByUsername(String username) {
-        return heroRepository.findByName(username);
     }
 
     public void renameHero(Long id, String username) {
@@ -61,13 +54,8 @@ public class HeroService {
 
     }
 
-    public List<Hero> findAll() {
-        return heroRepository.findAll();
-    }
-
     public Hero getHero(Long id) {
         Optional<Hero> byId = heroRepository.findById(id);
        return byId.get();
-
     }
 }
