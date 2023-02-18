@@ -7,7 +7,6 @@ public class UserLoginDTO {
 
     @Size(min = 5, max = 20)
     @NotBlank
-
     private String username;
 
     @Size(min = 3)

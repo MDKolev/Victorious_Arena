@@ -51,6 +51,4 @@ public class HeroDTO {
     public void setLevel(int level) {
         this.level = level;
     }
-
-
 }
