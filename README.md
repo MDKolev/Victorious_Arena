@@ -23,5 +23,5 @@ How to run:
 
  - Clone the code on your local machine
  - Open MySQL Workbench and connect to localhost:3307 with username: root, password:
- - Open DemoWebApplication in your IDE(IntelliJ IDEA or Eclipse)
+ - Open VictoriousArena in your IDE(IntelliJ IDEA or Eclipse)
  - Run the application
