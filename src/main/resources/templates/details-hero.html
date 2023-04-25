@@ -33,7 +33,8 @@
                                     <a th:href="@{/hero/delete/{id}(id=${hero.id})}" type="button"
                                        class="btn btn-danger btn-sm">Delete</a>
                                     <a th:href="@{/hero/rename/{id}(id=${hero.id})}" type="button"
-                                       class="btn btn-warning btn-sm">Rename</a>
+                                       class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                       data-bs-target="#staticBackdrop">Rename</a>
                                 </div>
                             </td>
                         </tr>

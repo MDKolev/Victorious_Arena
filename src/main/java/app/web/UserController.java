@@ -22,9 +22,7 @@ public class UserController {
 
     private final UserService userService;
     private final ModelMapper modelMapper;
-
     private final BCryptPasswordEncoder passwordEncoder;
-
     private final CurrentUser currentUser;
 
     public UserController(UserService userService, ModelMapper modelMapper, BCryptPasswordEncoder passwordEncoder, CurrentUser currentUser) {

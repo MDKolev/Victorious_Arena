@@ -23,18 +23,17 @@ public class HeroController {
 
     private final ModelMapper modelMapper;
 
-    public HeroController(ModelMapper modelMapper, HeroRepository heroRepository, HeroService heroService) {
-        this.modelMapper = modelMapper;
-        this.heroRepository = heroRepository;
-        this.heroService = heroService;
-    }
-
     @Autowired
     private HeroRepository heroRepository;
 
     @Autowired
     private HeroService heroService;
 
+    public HeroController(ModelMapper modelMapper, HeroRepository heroRepository, HeroService heroService) {
+        this.modelMapper = modelMapper;
+        this.heroRepository = heroRepository;
+        this.heroService = heroService;
+    }
 
     @GetMapping("/home")
     public String home() {

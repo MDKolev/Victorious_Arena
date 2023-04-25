@@ -1,7 +1,6 @@
 package app.service;
 
 import app.domain.dto.HeroDTO;
-import app.domain.entity.ClassEnum;
 import app.domain.entity.Hero;
 import app.repository.HeroRepository;
 import app.repository.UserRepository;
@@ -12,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
